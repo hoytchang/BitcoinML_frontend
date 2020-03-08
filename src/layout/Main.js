@@ -1,7 +1,13 @@
 import React from 'react';
 import Chart from '../components/Chart'
-import { Layout, Row, Col } from 'antd';
+import { Collapse, Button } from 'antd';
 import bitcoinPrice from '../data/market-price.json';
+
+const { Panel } = Collapse;
+
+function callback(key) {
+    console.log(key);
+}
 
 class Main extends React.Component {
     constructor(){
@@ -10,6 +16,8 @@ class Main extends React.Component {
             priceData:{},
         };
     }
+
+    
 
     componentWillMount(){
         this.getChartData();
@@ -35,29 +43,31 @@ class Main extends React.Component {
 
     render() {
         return (
-            <div>
-                <div style={{}}>
-                    <div style={{display:"inline", background: 'lightgrey'}}>
-                        left
-                        
-                    </div>
-                    <div style={{display:"inline", background: 'black', color:"white"}}>
-                        mid
-                        
-                    </div>
-                    <div style={{display:"inline", background: 'grey'}}>
-                        right
-                    </div>
-                </div>
-                <div 
-                    //style={{height:"400px", width:"800px"}}
+            <div style={{padding:20}}>
+                <Collapse 
+                    defaultActiveKey={['1']} 
+                    onChange={callback}
                 >
-                    <Chart
-                        chartData={this.state.priceData}
-                        title='Bitcoin Market Price (USD)'
-                    />
+                    <Panel header="Price - Actual and Predicted" key="1" >
+                        <div 
+                            //style={{height:"400px", width:"800px"}}
+                        >
+                            <Chart
+                                chartData={this.state.priceData}
+                                title='Bitcoin Market Price (USD)'
+                            />
 
-                </div>
+                        </div>
+                    </Panel>
+                    <Panel header="Model Settings" key="2">
+                        <p>model settings under construction</p>
+                        <Button type="primary">Train Model</Button>
+                    </Panel>
+                    <Panel header="Factors" key="3">
+                        <p>factors under construction</p>
+                    </Panel>
+                </Collapse>
+                
             </div>
         );
     }

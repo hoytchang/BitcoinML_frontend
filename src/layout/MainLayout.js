@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { withRouter } from 'react-router-dom';
+import 'antd/dist/antd.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -9,12 +10,14 @@ class MainLayout extends React.Component {
         return(
             <div>
                 <Layout>
-                    <Header style={{background: 'orange'}}>
-                        <div style={{fontSize: 35, padding:3, color:'white', fontWeight:'bold'}}>
-                            Bitcoin ML
-                        </div>
-                        <div style={{fontSize: 20, padding:3, color:'white'}}>
-                            Build your own machine learning model to predict bitcoin prices
+                    <Header style={{background: 'orange', textAlign: "left"}}>
+                        <div>
+                            <span style={{fontSize: 35, padding:0, color:'white', fontWeight:'bold'}}>
+                                Bitcoin ML
+                            </span>
+                            <span style={{fontSize: 20, padding:30, color:'white'}}>
+                                Build your own machine learning model to predict bitcoin prices
+                            </span>
                         </div>
                     </Header>
                     <Content>
