@@ -1,7 +1,11 @@
 import React from 'react';
 import Chart from '../components/Chart'
 import { Collapse, Button } from 'antd';
+
 import bitcoinPrice from '../data/market-price.json';
+import hashRate from '../data/hash-rate.json';
+import nTransactions from '../data/n-transactions.json';
+import nUniqueAddresses from '../data/n-unique-addresses.json';
 
 const { Panel } = Collapse;
 
@@ -14,10 +18,11 @@ class Main extends React.Component {
         super();
         this.state = {
             priceData:{},
+            hashRateData:{},
+            nTransactionsData:{},
+            nUniqueAddressesData:{},
         };
     }
-
-    
 
     componentWillMount(){
         this.getChartData();
@@ -34,6 +39,39 @@ class Main extends React.Component {
                         showLine: true,
                         pointRadius: 0.0,
                         data: bitcoinPrice.values,
+                        //backgroundColor: 'red'
+                    }
+                ]
+            },
+            hashRateData: {
+                datasets:[
+                    {
+                        label: 'Hash Rate TH/s',
+                        showLine: true,
+                        pointRadius: 0.0,
+                        data: hashRate.values,
+                        //backgroundColor: 'red'
+                    }
+                ]
+            },
+            nTransactionsData: {
+                datasets:[
+                    {
+                        label: 'Number of Transactions',
+                        showLine: true,
+                        pointRadius: 0.0,
+                        data: nTransactions.values,
+                        //backgroundColor: 'red'
+                    }
+                ]
+            },
+            nUniqueAddressesData: {
+                datasets:[
+                    {
+                        label: 'Number of Transactions',
+                        showLine: true,
+                        pointRadius: 0.0,
+                        data: nUniqueAddresses.values,
                         //backgroundColor: 'red'
                     }
                 ]
@@ -64,7 +102,20 @@ class Main extends React.Component {
                         <Button type="primary">Train Model</Button>
                     </Panel>
                     <Panel header="Factors" key="3">
-                        <p>factors under construction</p>
+                        <div>
+                            <Chart
+                                chartData={this.state.hashRateData}
+                                title='Hash Rate TH/s'
+                            />
+                            <Chart
+                                chartData={this.state.nTransactionsData}
+                                title='Number of Transactions'
+                            />
+                            <Chart
+                                chartData={this.state.nUniqueAddressesData}
+                                title='Number of Unique Addresses'
+                            />
+                        </div>
                     </Panel>
                 </Collapse>
                 
