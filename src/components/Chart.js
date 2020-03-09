@@ -22,6 +22,16 @@ class Chart extends Component{
                 <Scatter
                     data={this.state.chartData}
                     options={{
+                        scales: {
+                            xAxes:[{
+                                type: 'time',
+                                distribution: 'series',
+                                time: {unit: 'year'},
+                            }],
+                            yAxes:[{
+                                type: 'linear'
+                            }],
+                        },
                         maintainAspectRatio:false,
                         title:{
                             display:this.props.displayTitle,

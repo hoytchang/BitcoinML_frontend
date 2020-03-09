@@ -24,58 +24,37 @@ class Main extends React.Component {
         };
     }
 
-    componentWillMount(){
-        this.getChartData();
+    convertDataToObject(dataName, dataValues){
+        // Convert unix time
+        dataValues.forEach(i => i.x = new Date(i.x * 1000));
+
+        // Put data in a format ChartJS can read
+        let obj = {
+            labels: [dataName],
+            datasets:[
+                {
+                    label: dataName,
+                    showLine: true,
+                    pointRadius: 0.0,
+                    data: dataValues,
+                    //backgroundColor: 'red'
+                }
+            ]
+        };
+        return obj;
     }
 
-    getChartData(){
+    componentWillMount(){
         // ajax call here
         this.setState({
-            priceData: {
-                labels: ['price'],
-                datasets:[
-                    {
-                        label: 'Price',
-                        showLine: true,
-                        pointRadius: 0.0,
-                        data: bitcoinPrice.values,
-                        //backgroundColor: 'red'
-                    }
-                ]
-            },
-            hashRateData: {
-                datasets:[
-                    {
-                        label: 'Hash Rate TH/s',
-                        showLine: true,
-                        pointRadius: 0.0,
-                        data: hashRate.values,
-                        //backgroundColor: 'red'
-                    }
-                ]
-            },
-            nTransactionsData: {
-                datasets:[
-                    {
-                        label: 'Number of Transactions',
-                        showLine: true,
-                        pointRadius: 0.0,
-                        data: nTransactions.values,
-                        //backgroundColor: 'red'
-                    }
-                ]
-            },
-            nUniqueAddressesData: {
-                datasets:[
-                    {
-                        label: 'Number of Transactions',
-                        showLine: true,
-                        pointRadius: 0.0,
-                        data: nUniqueAddresses.values,
-                        //backgroundColor: 'red'
-                    }
-                ]
-            },
+            priceData: 
+                this.convertDataToObject('Price', bitcoinPrice.values),
+            hashRateData: 
+                this.convertDataToObject('Hash Rate TH/s', hashRate.values),
+            nTransactionsData: 
+                this.convertDataToObject('Number of Transactions', nTransactions.values),
+            nUniqueAddressesData: 
+                this.convertDataToObject('Number of Unique Addresses', nUniqueAddresses.values),
         });
     }
 
