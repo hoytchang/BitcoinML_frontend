@@ -43,8 +43,7 @@ class Chart extends Component{
                             position:this.props.legendPosition,
                         }
                     }}
-                    height="400"
-                    //width="200"
+                    height={400}
                 />
             </div>
         )
